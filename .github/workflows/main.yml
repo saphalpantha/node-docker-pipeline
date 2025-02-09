@@ -1,0 +1,24 @@
+name: Build and Deploy to Docker Hub
+
+on: 
+  push: 
+    branches: [main]
+
+  pull_request:
+    branches: [main]
+  
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: checkout
+          uses: actions/checkout@v4
+
+        - name: build image
+          run: docker --tag saphalpantha/serve-node:latest build -f Dockerfile.dev .
+
+        - name: push image to docker Hub
+          run: |
+            docker push saphalpantha/serve-node:latest
+            

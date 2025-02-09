@@ -1,0 +1,15 @@
+FROM node:alpine
+
+WORKDIR /home/node
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 5000
+
+CMD ["npm", "run", "start"]
